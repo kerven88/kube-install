@@ -47,7 +47,7 @@ If you need to specify the directory path to add Kubernetes node, you can set it
 
 ![kube-dashboard](images/webnodeadd001.jpg)
 
-In addition, you can also add Kubernetes node using the Kube-Install web platform. For the installation process using the web platform, <a href="docs/webinstall0.7.md">click here to view more details</a> ! <br>
+In addition, you can also add Kubernetes node using the Kube-Install web platform. For the installation process using the web platform, <a href="webinstall0.7.md">click here to view more details</a> ! <br>
 
 <br>
 
@@ -71,7 +71,7 @@ Notice: If you specify the `-softdir` parameter value during the installation or
 
 ![kube-dashboard](images/webnodeadd001.jpg)
 
-In addition, you can also delete Kubernetes node using the Kube-Install web platform. For the installation process using the web platform, <a href="docs/webinstall0.7.md">click here to view more details</a> ! <br>
+In addition, you can also delete Kubernetes node using the Kube-Install web platform. For the installation process using the web platform, <a href="webinstall0.7.md">click here to view more details</a> ! <br>
 
 <br>
 
@@ -92,7 +92,7 @@ Execute the following command on kube-install host:<br>
 ```
 
 Notice: If you specify the `-softdir` parameter value during the installation operation, please specify the same `-softdir` parameter value during the delmaster operation.<br>
-In addition, you can also delete Kubernetes master using the Kube-Install web platform. For the installation process using the web platform, <a href="docs/webinstall0.7.md">click here to view more details</a> ! <br>
+In addition, you can also delete Kubernetes master using the Kube-Install web platform. For the installation process using the web platform, <a href="webinstall0.7.md">click here to view more details</a> ! <br>
 
 The architecture after installation is shown in the following figure:
 
@@ -112,7 +112,7 @@ Execute the following command on kube-install host:<br>
 
 Notice: Please make sure that the `-ostype` flag you entered is correct, only support `rhel7`, `rhel8`, `centos7`, `centos8`, `ubuntu20`, `suse15` these types of "ostype".<br>
 If you specify the `-softdir` parameter value during the installation operation, please specify the same `-softdir` parameter value during the rebuildmaster operation.<br>
-In addition, you can also rebuild Kubernetes master using the Kube-Install web platform. For the installation process using the web platform, <a href="docs/webinstall0.7.md">click here to view more details</a> ! <br>
+In addition, you can also rebuild Kubernetes master using the Kube-Install web platform. For the installation process using the web platform, <a href="webinstall0.7.md">click here to view more details</a> ! <br>
 
 <br>
 
@@ -137,7 +137,7 @@ Notice: If you specify the `-softdir` parameter value during the installation op
 
 ![kube-dashboard](images/webinstall002.jpg)
 
-In addition, you can also uninstall the Kubernetes cluster using the Kube-Install web platform. For the installation process using the web platform, <a href="docs/webinstall0.7.md">click here to view more details</a> ! 
+In addition, you can also uninstall the Kubernetes cluster using the Kube-Install web platform. For the installation process using the web platform, <a href="webinstall0.7.md">click here to view more details</a> ! 
 
 <br>
 <br>
