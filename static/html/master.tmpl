@@ -67,6 +67,13 @@
     </script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
+    <div id="master_black" class="black_overlay"></div>
+    <div id="progress_content" class="progress_content">
+           <div style="text-align: center;">
+               <img alt="{{if eq .Lang "cn"}}正在操作中，请稍候…{{else}}Operation in progress, please wait{{end}}" src="static/img/Icons/Load/load-8.gif"/>
+               {{if eq .Lang "cn"}}&nbsp;操作中，请稍候…{{else}}&nbsp;Operating,please wait{{end}}
+           </div>
+    </div>
 
         <header class="main_header">
                 <div class="wrapper">
@@ -81,7 +88,7 @@
                                                 <div class="out_border">
                                                         <div class="button_wrapper">
                                                                 <div class="in_border" onclick="document.getElementById('log_black').style.display='block';document.getElementById('log_content').style.display='block'">
-                                                                        <a {{if eq .Lang "cn"}} href="/masteradmin?label={{.Label}}&softdir={{.Softdir}}&ostype={{.Ostype}}&lang=en" {{else}} href="/masteradmin?label={{.Label}}&softdir={{.Softdir}}&ostype={{.Ostype}}&lang=cn" {{end}} title="{{if eq .Lang "cn"}}切换语言{{else}}Switch Language{{end}}" class="the_button">
+                                                                        <a {{if eq .Lang "cn"}} href="/masteradmin?label={{.Label}}&softdir={{.Softdir}}&ostype={{.Ostype}}&k8sver={{.K8sver}}&lang=en" {{else}} href="/masteradmin?label={{.Label}}&softdir={{.Softdir}}&ostype={{.Ostype}}&k8sver={{.K8sver}}&lang=cn" {{end}} title="{{if eq .Lang "cn"}}切换语言{{else}}Switch Language{{end}}" class="the_button">
                                                                                 {{if eq .Lang "cn"}}
                                                                                         <span class="i_32_en"></span>
                                                                                 {{else}}
@@ -209,8 +216,9 @@
 									<th>
 										<input type="checkbox" class="simple_form tMainC">
 									</th>
-									<th>{{if eq .Lang "cn"}}Kubernetes Master IP地址{{else}}Kubernetes Master IP Address{{end}}</th>
-									<th>{{if eq .Lang "cn"}}Kubernetes Master部署状态{{else}}Kubernetes Master Installation Status{{end}}</th>
+									<th>{{if eq .Lang "cn"}}Master IP地址{{else}}Master IP Address{{end}}</th>
+									<th>{{if eq .Lang "cn"}}部署状态{{else}}Installation Status{{end}}</th>
+                                                                        <th>{{if eq .Lang "cn"}}终端状态{{else}}Terminal Status{{end}}</th>
                                                                         <th>{{if eq .Lang "cn"}}更多操作{{else}}More Operation{{end}}</th>
 								</tr>
 							</thead>
@@ -228,7 +236,10 @@
 									{{ if eq .Masterstatus "notinstall" }} <img src="static/img/Icons/32/i_32_notinstall.png" style="vertical-align: middle;"/> <span style="display: inline-block;">{{if eq .Lang "cn"}}未部署{{else}}Not installed{{end}}</span>{{end}}
 									{{ if eq .Masterstatus "unknow" }} <img src="static/img/Icons/32/i_32_unknow.png" style="vertical-align: middle;"/> <span style="display: inline-block;">{{if eq .Lang "cn"}}未知状态{{else}}Unknow{{end}}</span>{{end}}
 										</td>
-                                                                                <td align="center">{{ if eq .Masterstatus "ok" }}<a href="masterinfo?label={{ .Label }}&masterip={{ .Master }}&softdir={{ .Softdir }}&k8sver={{ .K8sver }}&ostype={{ .Ostype }}&masterstatus={{ .Masterstatus }}" style="background:#99FF99;">{{end}} {{if eq .Lang "cn"}}查看详细{{else}}View Details{{end}} {{ if eq .Masterstatus "ok" }}</a>{{end}}</td>
+                                                                                <td align="center">
+                                                                        {{ if eq .TTYstatus "enable" }} <img src="static/img/Icons/32/i_32_ttyenable.png" style="vertical-align: middle;"/> <span style="display: inline-block;">{{if eq .Lang "cn"}}已启用{{else}}Enable{{end}}</span> {{else}} <img src="static/img/Icons/32/i_32_ttydisable.png" style="vertical-align: middle;"/> <span style="display: inline-block;">{{if eq .Lang "cn"}}已禁用{{else}}Disable{{end}}</span>{{end}}
+                                                                                </td>
+                                                                                <td align="center">{{ if eq .Masterstatus "ok" }}<a href="masterinfo?label={{ .Label }}&masterip={{ .Master }}&softdir={{ .Softdir }}&k8sver={{ .K8sver }}&ostype={{ .Ostype }}&masterstatus={{ .Masterstatus }}" style="background:#2E8B57; background-color:#2E8B57; color:#ffffff;">&nbsp;&nbsp;{{if eq .Lang "cn"}}查看详细{{else}}View Details{{end}}&nbsp;&nbsp;</a>{{end}} {{ if eq .TTYstatus "enable" }}<a href="http://{{ .Master }}:7681" target="_blank" style="background:#2E8B57; background-color:#2E8B57; color:#ffffff;">&nbsp;&nbsp;{{if eq .Lang "cn"}}登录终端{{else}}Web Terminal{{end}}&nbsp;&nbsp;</a>{{end}} | {{ if eq .TTYstatus "enable" }} <a onclick="document.getElementById('progress_content').style.display='block';document.getElementById('master_black').style.display='block';window.open('tty?ttyip={{ .Master }}&ttyoption=disable&opt=mastertty&label={{.Label}}&softdir={{.Softdir}}&ostype={{.Ostype}}&k8sver={{.K8sver}}','_self');" href="##" style="background:#5182B6; background-color:#5182B6; color:#ffffff;">&nbsp;&nbsp;{{if eq .Lang "cn"}}禁用终端{{else}}Disable Terminal{{end}}&nbsp;&nbsp;</a> {{else}} <a onclick="document.getElementById('progress_content').style.display='block';document.getElementById('master_black').style.display='block';window.open('tty?ttyip={{ .Master }}&ttyoption=enable&opt=mastertty&label={{.Label}}&softdir={{.Softdir}}&ostype={{.Ostype}}&k8sver={{.K8sver}}','_self');" href="##" style="background:#5182B6; background-color:#5182B6; color:#ffffff;">&nbsp;&nbsp;{{if eq .Lang "cn"}}启用终端{{else}}Enable Terminal{{end}}&nbsp;&nbsp;</a> {{end}} </td>
 									</tr>
 								{{end}}
 							</tbody>

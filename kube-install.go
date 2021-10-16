@@ -7,7 +7,6 @@ import (
     "path/filepath"
     "flag"
     "strings"
-//    "strconv"
     "kube-install/lib"
 )
 
@@ -55,12 +54,12 @@ func main() {
     kilib.CheckErr(err, "", logName, "")
     currentDir := filepath.Dir(path)
     currentUser := strings.Replace(kilib.ShellOutput("echo $USER"), "\n", "", -1)
-    kissh := currentDir+"/proc/kissh/bin/ansible-playbook"
+    kissh := currentDir+"/pkg/proc/kissh/bin/ansible-playbook"
 
     // Set the version number and release date of Kube-Install.
     const (
-        Version string = "v0.7.1"
-        ReleaseDate string = "10/9/2021"
+        Version string = "v0.7.2"
+        ReleaseDate string = "11/9/2021"
         CompatibleK8S string = "1.17, 1.18, 1.19, 1.20, 1.21, 1.22, and 1.23"
         CompatibleOS string = "CentOS linux 7, CentOS linux 8, RHEL 7, RHEL 8, Ubuntu 20, and SUSE 15"
     )

@@ -27,7 +27,7 @@ func SshKey(ipArray []string, sshPass string, currentDir string) error {
 
 // Initialize and install the most basic operation tool components.
 func SshOpsInit(currentDir string, osType string, mode string) error {
-    err := ShellExecute(currentDir+"/proc/sshops-init.sh \""+currentDir+"\" \""+osType+"\"")
+    err := ShellExecute(currentDir+"/sys/0x00000000000ssh/sshops-init.sh \""+currentDir+"\" \""+osType+"\"")
     return err
 }
 

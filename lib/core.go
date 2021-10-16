@@ -1,6 +1,7 @@
 package kilib
 
 import (
+//    "fmt"
     "os"
     "time"
 )
@@ -14,6 +15,7 @@ func RebuildMasterCore(mode string, masterArray []string, currentDir string, kis
     for i := 0; i < len(masterArray); i++ {
         CreateDir(currentDir+"/data/output"+subProcessDir+"/masters/"+masterArray[i], currentDir, logName, mode)
         CreateFile(currentDir+"/data/output"+subProcessDir+"/masters/"+masterArray[i]+"/status.txt", currentDir, logName, mode)
+        CreateFile(currentDir+"/data/output"+subProcessDir+"/masters/"+masterArray[i]+"/ttystatus.txt", currentDir, logName, mode)
         DatabaseUpdate(currentDir+"/data/output"+subProcessDir+"/masters/"+masterArray[i]+"/status.txt", "rebuilding", currentDir, logName, mode)
     }
     os.OpenFile(currentDir+"/data/logs"+subProcessDir+"/logs/rebuildmaster.log", os.O_RDWR|os.O_TRUNC|os.O_CREATE, 0766)
@@ -91,11 +93,12 @@ func AddNodeCore(mode string, node string, nodeArray []string, currentDir string
     for i := 0; i < len(nodeArray); i++ {
         CreateDir(currentDir+"/data/output"+subProcessDir+"/nodes/"+nodeArray[i], currentDir, logName, mode)
         CreateFile(currentDir+"/data/output"+subProcessDir+"/nodes/"+nodeArray[i]+"/status.txt", currentDir, logName, mode)
+        CreateFile(currentDir+"/data/output"+subProcessDir+"/nodes/"+nodeArray[i]+"/ttystatus.txt", currentDir, logName, mode)
         DatabaseUpdate(currentDir+"/data/output"+subProcessDir+"/nodes/"+nodeArray[i]+"/status.txt", "adding", currentDir, logName, mode)
     }
     os.OpenFile(currentDir+"/data/logs"+subProcessDir+"/logs/addnode.log", os.O_RDWR|os.O_TRUNC|os.O_CREATE, 0766)
     ShellExecute("echo \"*************************************************************************************\n\n[Info] "+time.Now().String()+" Adding kubernetes node, please wait ... \n\""+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/addnode.log")
-    ShellExecute("echo \"    Kubernetes cluster label: "+label+"\n    Kubernetes node: "+node+"\n    System user for operation: "+currentUser+"\""+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/addnode.log")
+    ShellExecute("echo \"    Kubernetes Cluster Label: "+label+"\n    Kubernetes Node: "+node+"\n    System User for Operation: "+currentUser+"\""+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/addnode.log")
     ShellExecute("sed -i '1d' "+currentDir+"/data/msg/msg.txt")
     ShellExecute("echo \"<div class='g_12'><div class='info iDialog'>[Info] "+time.Now().String()+" Adding kubernetes node to "+label+" cluster ... </div></div>\" >> "+currentDir+"/data/msg/msg.txt")
     if !AddnodeConfig(mode, nodeArray, currentDir, subProcessDir, logName) {
@@ -180,10 +183,12 @@ func InstallCore(mode string, master string, masterArray []string, node string, 
     for i := 0; i < len(masterArray); i++ {
         CreateDir(currentDir+"/data/output"+subProcessDir+"/masters/"+masterArray[i], currentDir, logName, mode)
         CreateFile(currentDir+"/data/output"+subProcessDir+"/masters/"+masterArray[i]+"/status.txt", currentDir, logName, mode)
+        CreateFile(currentDir+"/data/output"+subProcessDir+"/masters/"+masterArray[i]+"/ttystatus.txt", currentDir, logName, mode)
     }
     for j := 0; j < len(nodeArray); j++ {
         CreateDir(currentDir+"/data/output"+subProcessDir+"/nodes/"+nodeArray[j], currentDir, logName, mode)
         CreateFile(currentDir+"/data/output"+subProcessDir+"/nodes/"+nodeArray[j]+"/status.txt", currentDir, logName, mode)
+        CreateFile(currentDir+"/data/output"+subProcessDir+"/nodes/"+nodeArray[j]+"/ttystatus.txt", currentDir, logName, mode)
     }
     if way == "newinstall" {
         DatabaseUpdate(currentDir+"/data/output"+subProcessDir+"/softdir.txt", softDir, currentDir, logName, mode)
@@ -210,7 +215,7 @@ func InstallCore(mode string, master string, masterArray []string, node string, 
     }
     if installTime != "" {
         ShellExecute("echo \"*************************************************************************************\n\n[Info] "+time.Now().String()+" Start scheduled installation task, please wait ...  \n\""+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/install.log")
-        ShellExecute("echo \"    Kubernetes Cluster Label: "+label+"\n    Kubernetes Version: Kubernetes v"+k8sVer+"\n    Kubernetes master: "+master+"\n    Kubernetes node: "+node+"\n    Operating System Type: "+osType+"\n    System user for installation: "+currentUser+"\""+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/install.log")
+        ShellExecute("echo \"    Kubernetes Cluster Label: "+label+"\n    Kubernetes Version: Kubernetes v"+k8sVer+"\n    Kubernetes Master: "+master+"\n    Kubernetes Node: "+node+"\n    Operating System Type: "+osType+"\n    System User for Installation: "+currentUser+"\""+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/install.log")
         DatabaseUpdate(currentDir+"/data/output"+subProcessDir+"/softdirtemp.txt", softDir, currentDir, logName, mode)
         DatabaseUpdate(currentDir+"/data/output"+subProcessDir+"/ostypetemp.txt", osType, currentDir, logName, mode)
         DatabaseUpdate(currentDir+"/data/output"+subProcessDir+"/k8svertemp.txt", k8sVer, currentDir, logName, mode)
@@ -219,7 +224,7 @@ func InstallCore(mode string, master string, masterArray []string, node string, 
         return
     } else {
         ShellExecute("echo \"*************************************************************************************\n\n[Info] "+time.Now().String()+" Installing kubernetes cluster, please wait ... \n\""+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/install.log")
-        ShellExecute("echo \"    Kubernetes Cluster Label: "+label+"\n    Kubernetes Version: Kubernetes v"+k8sVer+"\n    Kubernetes master: "+master+"\n    Kubernetes node: "+node+"\n    Operating System Type: "+osType+"\n    System user for installation: "+currentUser+"\""+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/install.log")
+        ShellExecute("echo \"    Kubernetes Cluster Label: "+label+"\n    Kubernetes Version: Kubernetes v"+k8sVer+"\n    Kubernetes Master: "+master+"\n    Kubernetes Node: "+node+"\n    Operating System Type: "+osType+"\n    System User for Installation: "+currentUser+"\""+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/install.log")
         sch,_ := ReadFile(currentDir+"/data/output"+subProcessDir+"/scheduler.txt")
         if sch == "on" {
             ShellExecute("echo [Error] "+time.Now().String()+" \"Installation conflict! Background scheduled tasks exist and installation is in progress.\n\""+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/install.log")
@@ -298,7 +303,7 @@ func InstallCore(mode string, master string, masterArray []string, node string, 
 func UninstallCore(mode string, master string, masterArray []string, node string, nodeArray []string, softDir string, currentDir string, kissh string, subProcessDir string, currentUser string, label string, osTypeResult string, logName string, CompatibleOS string) {
     opt := "uninstall"
     logStr := LogStr(mode)
-    CheckOS(CompatibleOS, osTypeResult, currentDir, logName, mode)
+    //CheckOS(CompatibleOS, osTypeResult, currentDir, logName, mode)
     CreateDir(currentDir+"/data/output"+subProcessDir, currentDir, logName, mode)
     DatabaseUpdate(currentDir+"/data/output"+subProcessDir+"/status.txt", "uninstalling", currentDir, logName, mode)
     DatabaseUpdate(currentDir+"/data/output"+subProcessDir+"/progressbar.txt", "1", currentDir, logName, mode)
@@ -310,7 +315,7 @@ func UninstallCore(mode string, master string, masterArray []string, node string
     }
     os.OpenFile(currentDir+"/data/logs"+subProcessDir+"/logs/uninstall.log", os.O_RDWR|os.O_TRUNC|os.O_CREATE, 0766)
     ShellExecute("echo \"*************************************************************************************\n\n[Info] "+time.Now().String()+" Uninstalling kubernetes cluster, please wait ... \n\""+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/uninstall.log")
-    ShellExecute("echo \"    Kubernetes cluster label: "+label+"\n    Kubernetes master: "+master+"\n    Kubernetes node: "+node+"\n    System user for uninstallation: "+currentUser+"\""+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/uninstall.log")
+    ShellExecute("echo \"    Kubernetes Cluster Label: "+label+"\n    Kubernetes Master: "+master+"\n    Kubernetes Node: "+node+"\n    System User for Uninstallation: "+currentUser+"\n\""+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/uninstall.log")
     ShellExecute("sed -i '1d' "+currentDir+"/data/msg/msg.txt")
     ShellExecute("echo \"<div class='g_12'><div class='info iDialog'>[Info] "+time.Now().String()+" Uninstalling kubernetes cluster of "+label+" cluster ... </div></div>\" >> "+currentDir+"/data/msg/msg.txt")
     GeneralConfig(mode, masterArray, nodeArray, currentDir, softDir, subProcessDir, osTypeResult, "", logName)
@@ -328,7 +333,7 @@ func UninstallCore(mode string, master string, masterArray []string, node string
     }
     DelmasterYML("",currentDir+"/data/output"+subProcessDir, currentDir, currentUser, logName, true)
     DelnodeYML("",currentDir+"/data/output"+subProcessDir, currentDir, currentUser, logName, true)
-    ShellExecute("echo [Info] "+time.Now().String()+" \"Loading operation configuration ... \n\""+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/uninstall.log")
+    ShellExecute("echo [Info] "+time.Now().String()+" \"Loading operation configuration ... \""+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/uninstall.log")
     err_delnode := ExecuteOpt(kissh, currentDir, opt, "delnode", subProcessDir, "")
     if err_delnode != nil {
         ShellExecute("echo [Error] "+time.Now().String()+" \"Failed to delete node of "+label+" cluster! \n\""+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/uninstall.log")
@@ -399,11 +404,13 @@ func InstallScheduler(label string, masterArray []string, nodeArray []string, ki
     for i := 0; i < len(masterArray); i++ {
         CreateDir(currentDir+"/data/output"+subProcessDir+"/masters/"+masterArray[i], currentDir, logName, mode)
         CreateFile(currentDir+"/data/output"+subProcessDir+"/masters/"+masterArray[i]+"/status.txt", currentDir, logName, mode)
+        CreateFile(currentDir+"/data/output"+subProcessDir+"/masters/"+masterArray[i]+"/ttystatus.txt", currentDir, logName, mode)
         DatabaseUpdate(currentDir+"/data/output"+subProcessDir+"/masters/"+masterArray[i]+"/status.txt", "adding", currentDir, logName, mode)
     }
     for j := 0; j < len(nodeArray); j++ {
         CreateDir(currentDir+"/data/output"+subProcessDir+"/nodes/"+nodeArray[j], currentDir, logName, mode)
         CreateFile(currentDir+"/data/output"+subProcessDir+"/nodes/"+nodeArray[j]+"/status.txt", currentDir, logName, mode)
+        CreateFile(currentDir+"/data/output"+subProcessDir+"/nodes/"+nodeArray[j]+"/ttystatus.txt", currentDir, logName, mode)
         DatabaseUpdate(currentDir+"/data/output"+subProcessDir+"/nodes/"+nodeArray[j]+"/status.txt", "adding", currentDir, logName, mode)
     }
     err_install := ExecuteOpt(kissh, currentDir, opt, layoutName, subProcessDir, mode)
@@ -466,7 +473,7 @@ func ExecuteDeleteNode(nodeArray []string, currentDir string, subProcessDir stri
             }
         }
     }
-    ShellExecute(currentDir+"/proc/.bin/kubectl --kubeconfig "+currentDir+"/data/output"+subProcessDir+"/cert/ssl/kube-install.kubeconfig delete node "+delNodeList+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/"+opt+".log")
+    ShellExecute(currentDir+"/pkg/proc/.bin/kubectl --kubeconfig "+currentDir+"/data/output"+subProcessDir+"/cert/ssl/kube-install.kubeconfig delete node "+delNodeList+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/"+opt+".log")
 }
 
 // Execute the operation commands of the core part.
@@ -477,6 +484,38 @@ func ExecuteOpt(kiCommand string, currentDir string, opt string, layoutName stri
         inventoryName = layoutName
     }
     err := ShellExecute(kiCommand+" -i "+currentDir+"/data/output"+subProcessDir+"/"+inventoryName+".inventory "+currentDir+"/data/output"+subProcessDir+"/k8scluster-"+layoutName+".yml"+logStr+currentDir+"/data/logs"+subProcessDir+"/logs/"+opt+".log" )
+    return err
+}
+
+// Perform remote TTY disable or enable operation
+func SwitchTTY(label string, currentDir string, ttyIP string, ttyOption string, logName string, mode string) error {
+    var err error
+    _,_,_,subProcessDir,_ := ParameterConvert(mode, "", "", "", label, "")
+    mstArrayLocal, err := GetAllDir(currentDir+"/data/output"+subProcessDir+"/masters", currentDir, logName, mode)
+    ndArrayLocal, err := GetAllDir(currentDir+"/data/output"+subProcessDir+"/nodes", currentDir, logName, mode)
+    if ttyOption == "enable" {
+        err = ShellExecute(currentDir+"/pkg/proc/kissh/bin/ansible all -i "+ttyIP+", -m command -a 'systemctl restart kube-install-ttyd.service'")
+        if err == nil {
+            if StrInArray(ttyIP, mstArrayLocal) {
+                DatabaseUpdate(currentDir+"/data/output"+subProcessDir+"/masters/"+ttyIP+"/ttystatus.txt", "enable", currentDir, logName, mode)
+            }
+            if StrInArray(ttyIP, ndArrayLocal) {
+                DatabaseUpdate(currentDir+"/data/output"+subProcessDir+"/nodes/"+ttyIP+"/ttystatus.txt", "enable", currentDir, logName, mode)
+            }
+            ShellExecute(currentDir+"/pkg/proc/kissh/bin/ansible all -i "+ttyIP+", -m command -a 'systemctl enable kube-install-ttyd.service'")
+        }
+    } else {
+        err = ShellExecute(currentDir+"/pkg/proc/kissh/bin/ansible all -i "+ttyIP+", -m command -a 'systemctl stop kube-install-ttyd.service'")
+        if err == nil {
+            if StrInArray(ttyIP, mstArrayLocal) {
+                DatabaseUpdate(currentDir+"/data/output"+subProcessDir+"/masters/"+ttyIP+"/ttystatus.txt", "disable", currentDir, logName, mode)
+            }
+            if StrInArray(ttyIP, ndArrayLocal) {
+                DatabaseUpdate(currentDir+"/data/output"+subProcessDir+"/nodes/"+ttyIP+"/ttystatus.txt", "disable", currentDir, logName, mode)
+            }
+            ShellExecute(currentDir+"/pkg/proc/kissh/bin/ansible all -i "+ttyIP+", -m command -a 'systemctl disable kube-install-ttyd.service'")
+        }
+    }
     return err
 }
 

@@ -1,7 +1,8 @@
-<div class='g_12'><div class='info iDialog'>[Info] 2021-09-29 19:52:43.872828729 +0800 CST m=+92.466133390 Uninstalling kubernetes cluster of cloudnativerk8s001 cluster ... </div></div>
-<div class='g_12'><div class='info iDialog'>[Info] 2021-09-29 19:54:04.444276159 +0800 CST m=+173.037580844 Kubernetes cluster (cloudnativerk8s001) has been uninstalled successfully! </div></div>
-<div class='g_12'><div class='info iDialog'>[Info] 2021-09-29 19:55:15.61003569 +0800 CST m=+244.203340401 Installing kubernetes cluster of cloudnativerk8s002 cluster ...</div></div>
-<div class='g_12'><div class='info iDialog'>[Info] 2021-09-29 20:06:31.031208213 +0800 CST m=+919.624512918 Kubernetes cluster (cloudnativerk8s003) has been installed successfully! </div></div>
-<div class='g_12'><div class='error iDialog'>[Error] 2021-09-29 20:06:59.764184932 +0800 CST m=+948.357489653 Kubernetes cluster (cloudnativerk8s001) install failed! </div></div>
-<div class='g_12'><div class='info iDialog'>[Info] 2021-09-29 20:07:34.525609355 +0800 CST m=+983.118914032 Kubernetes cluster (cloudnativerk8s004) has been installed successfully! </div></div>
-<div class='g_12'><div class='info iDialog'>[Info] 2021-09-29 20:07:41.915532915 +0800 CST m=+990.508837647 Kubernetes cluster (cloudnativerk8s005) has been installed successfully! </div></div>
+
+
+
+
+
+
+
+

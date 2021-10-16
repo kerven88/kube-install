@@ -48,7 +48,7 @@ Kubernetes集群的部署架构如下图所示：
 
 ![kube-dashboard](images/webnodeadd001.jpg)
 
-除了使用`kube-install -exec addnode`命令进行k8s-node节点扩容外，你也同样可以使用kube-install的Web管理平台来对k8s-node节点进行扩容。<a href="webinstall0.7-zh.md">点击这里可以查看使用kube-install的Web管理平台来扩容k8s-node节点的方法</a>。
+除了使用`kube-install -exec addnode`命令进行k8s-node节点扩容外，你也同样可以使用kube-install的Web管理平台来对k8s-node节点进行扩容。<a href="docs/webinstall0.7-zh.md">点击这里可以查看使用kube-install的Web管理平台来扩容k8s-node节点的方法</a>。
 
 <br>
 
@@ -72,7 +72,7 @@ Kubernetes集群的部署架构如下图所示：
 
 ![kube-dashboard](images/webnodeadd001.jpg)
 
-除了使用`kube-install -exec delnode`命令对k8s-node节点进行销毁外，你也同样可以使用kube-install的Web管理平台来对k8s-node节点进行销毁操作。<a href="webinstall0.7-zh.md">点击这里可以查看kube-install的Web管理平台的使用方法</a>。
+除了使用`kube-install -exec delnode`命令对k8s-node节点进行销毁外，你也同样可以使用kube-install的Web管理平台来对k8s-node节点进行销毁操作。<a href="docs/webinstall0.7-zh.md">点击这里可以查看kube-install的Web管理平台的使用方法</a>。
 
 <br>
 
@@ -92,7 +92,7 @@ Kubernetes集群的部署架构如下图所示：
 ```
 
 注意：如果你在安装Kubernetes集群的时候带上了`-softdir`参数来自定义安装目录路径的话，在销毁Kubernetes集群Master的时候也应该带上`-softdir`参数来指定安装目录路径，否则可能导致销毁不彻底。<br>
-除了使用`kube-install -exec delmaster`命令对k8s-master节点进行销毁外，你也同样可以使用kube-install的Web管理平台来对k8s-master节点进行销毁操作。<a href="webinstall0.7-zh.md">点击这里可以查看kube-install的Web管理平台的使用方法</a>。
+除了使用`kube-install -exec delmaster`命令对k8s-master节点进行销毁外，你也同样可以使用kube-install的Web管理平台来对k8s-master节点进行销毁操作。<a href="docs/webinstall0.7-zh.md">点击这里可以查看kube-install的Web管理平台的使用方法</a>。
 
 销毁完毕之后的部署架构如下图所示：
 
@@ -114,7 +114,7 @@ Kubernetes集群的部署架构如下图所示：
 
 <br>
 
-除了使用`kube-install -exec rebuildmaster`命令对k8s-master节点进行修复外，你也同样可以使用kube-install的Web管理平台来对k8s-master节点进行修复操作。<a href="webinstall0.7-zh.md">点击这里可以查看kube-install的Web管理平台的使用方法</a>。
+除了使用`kube-install -exec rebuildmaster`命令对k8s-master节点进行修复外，你也同样可以使用kube-install的Web管理平台来对k8s-master节点进行修复操作。<a href="docs/webinstall0.7-zh.md">点击这里可以查看kube-install的Web管理平台的使用方法</a>。
 
 <br>
 
@@ -138,7 +138,7 @@ Kubernetes集群的部署架构如下图所示：
 
 ![kube-dashboard](images/webinstall002.jpg)
 
-除了使用`kube-install -exec uninstall`命令对Kubernetes集群进行卸载操作外，你也同样可以使用kube-install的Web管理平台来对Kubernetes集群进行卸载操作。<a href="webinstall0.7-zh.md">点击这里可以查看kube-install的Web管理平台的使用方法</a>。
+除了使用`kube-install -exec uninstall`命令对Kubernetes集群进行卸载操作外，你也同样可以使用kube-install的Web管理平台来对Kubernetes集群进行卸载操作。<a href="docs/webinstall0.7-zh.md">点击这里可以查看kube-install的Web管理平台的使用方法</a>。
 
 <br>
 <br>

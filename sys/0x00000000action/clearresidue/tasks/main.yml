@@ -8,12 +8,22 @@
     path: /etc/kubernetes
     state: absent
   ignore_errors: yes
-- name: 3.Delete kubectl file
+- name: 3.Stop TTY service
+  service:
+    name: kube-install-ttyd
+    state: stopped
+    enabled: false
+  ignore_errors: yes
+- file:
+    path: /usr/local/bin/ttyd
+    state: absent
+  ignore_errors: yes
+- name: 4.Delete kubectl file
   file:
     path: /usr/sbin/kubectl
     state: absent
   ignore_errors: yes
-- name: 4.Delete other bin file
+- name: 5.Delete other bin file
   file:
     path: /usr/local/bin/{{item}}
     state: absent

@@ -3,8 +3,7 @@ kind: ClusterRoleBinding
 metadata:  
   name: kubernetes-dashboard-admin 
   labels:  
-    APPNAME: kube-system
-    CLUSTER: kube-system-dashboard
+    app: kube-dashboard
 roleRef:  
   apiGroup: rbac.authorization.k8s.io  
   kind: ClusterRole  

@@ -40,12 +40,14 @@
 /* Initiations & Media Query */
 	
 	a {
+                border-radius: 6px;
 		text-decoration: none;
 		outline: none;
 	}
 
 	a:focus {
 		outline: none;
+                text-shadow: 0 1px 0 #FFFFFF;
 	}
 
 	.wrapper {
@@ -1512,7 +1514,6 @@
 		font-family: Droid Sans;
 		color: #696969;
 		font-size: 14px;
-		text-shadow: 0 1px 0 #FFFFFF;
 		font-weight: normal;
 		line-height: 32px;
 	}
@@ -2471,7 +2472,16 @@
 	border-radius: 3px 3px 0 0;
         overflow: auto;
     }
-
+    .progress_content {
+        display: none;
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-top: -50px;
+        z-index:1002;
+        overflow: auto;
+    }
     .result_overlay{
         display: block;
         opacity:0.5;

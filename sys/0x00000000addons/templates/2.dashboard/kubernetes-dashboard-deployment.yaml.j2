@@ -4,8 +4,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   labels:
-    APPNAME: kube-system
-    CLUSTER: kube-system-dashboard
+    app: kube-dashboard
   name: kube-dashboard
   namespace: kube-system
 spec:
@@ -13,13 +12,11 @@ spec:
   revisionHistoryLimit: 5
   selector:
     matchLabels:
-      APPNAME: kube-system
-      CLUSTER: kube-system-dashboard
+      app: kube-dashboard
   template:
     metadata:
       labels:
-        APPNAME: kube-system
-        CLUSTER: kube-system-dashboard
+        app: kube-dashboard
     spec:
       affinity:
         nodeAffinity:

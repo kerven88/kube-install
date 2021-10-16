@@ -70,11 +70,12 @@
                           <tr><td>{{if eq .Lang "cn"}}部署时间：{{else}}Installation Time:{{end}}</td><td>{{.Createtime}}</td></tr>
                           <tr><td>{{if eq .Lang "cn"}}部署目录：{{else}}Installation Dir:{{end}}</td><td>{{ .Softdir }}</td></tr>
                           <tr><td>{{if eq .Lang "cn"}}实际运行状态：{{else}}Health Status:{{end}}</td><td>
-                                        {{ if eq .Runstatus "Ready" }} <img src="static/img/Icons/32/i_32_ok.png" style="vertical-align: middle;"/> <span style="display: inline-block;"> Ready </span>{{else}}<img src="static/img/Icons/32/i_32_notok.png" style="vertical-align: middle;"/> <span style="display: inline-block;"> NotReady </span>{{end}}
+                                        {{ if eq .Runstatus "True" }} <img src="static/img/Icons/32/i_32_ok.png" style="vertical-align: middle;"/> <span style="display: inline-block;"> Ready </span>{{else}}<img src="static/img/Icons/32/i_32_notok.png" style="vertical-align: middle;"/> <span style="display: inline-block;"> NotReady </span>{{end}}
                                 </td></tr>
                           <tr><td width="100">{{if eq .Lang "cn"}}归属集群：{{else}}Belonging Cluster:{{end}}</td><td>{{ if eq .Label ".default" }} {{if eq .Lang "cn"}}默>认{{else}}default{{end}}集群 {{else}} {{.Label}} {{end}}</td></tr>
                           <tr><td>{{if eq .Lang "cn"}}K8S组件版本：{{else}}Component Version:{{end}}</td><td>kubelet {{.K8sver}} / kube-proxy {{.K8sver}}</td></tr>
                           <tr><td>{{if eq .Lang "cn"}}Runtime版本：{{else}}Runtime Version:{{end}}</td><td>{{ .Runc }}</td></tr>
+                          <tr><td>{{if eq .Lang "cn"}}Node标签：{{else}}Node Labels:{{end}}</td><td>{{.Nodelabels}}</td></tr>
                           <tr><td>{{if eq .Lang "cn"}}操作系统版本：{{else}}OS Version:{{end}}</td><td>{{ .Osver }} &nbsp;&nbsp; ({{if eq .Lang "cn"}}内核: {{else}}kernel: {{end}}{{ .Kernelver }})</td></tr>
                           <tr><td>{{if eq .Lang "cn"}}CPU大小：{{else}}CPU Size:{{end}}</td><td>{{ .Cpu }}{{if eq .Lang "cn"}}核{{else}}C{{end}}</td></tr>
                           <tr><td>{{if eq .Lang "cn"}}内存容量：{{else}}Memory Size:{{end}}</td><td>{{ .Memory }}</td></tr>

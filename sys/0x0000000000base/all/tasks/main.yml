@@ -95,27 +95,36 @@
     name: systemd-journald
     state: restarted
   ignore_errors: yes
-- name: 15.Create resolv config file
+- name: 15.Install TTY software
+  copy:
+    src: "{{kipath}}/pkg/proc/.bin/ttyd"
+    dest: /usr/local/bin/
+    mode: 0755
+- copy:
+    src: ../templates/kube-install-ttyd.service
+    dest: /etc/systemd/system/
+    mode: 0644
+- name: 16.Create resolv config file
   file:
     path: /etc/resolv.conf 
     state: touch
     mode: 0644
   ignore_errors: yes
-- name: 16.Create k8s cert directory
+- name: 17.Create k8s cert directory
   file:
     path: "/etc/kubernetes/ssl/"
     state: directory
-- name: 17.Decompress k8s software package
+- name: 18.Decompress k8s software package
   unarchive:
     src: "{{kipath}}/pkg/k8s/k8s-{{k8sver}}.tar.gz"
     dest: /usr/local/bin/
     mode: 0755
-- name: 18.Decompress cfssl software package
+- name: 19.Decompress cfssl software package
   unarchive:
-    src: "{{kipath}}/pkg/cfssl.tgz"
+    src: "{{kipath}}/pkg/cfssl.tar.gz"
     dest: /usr/local/bin/
     mode: 0755
-- name: 19.Decompress helm software package
+- name: 20.Decompress helm software package
   unarchive:
     src: "{{kipath}}/pkg/helm-v3.5.3.tar.gz"
     dest: /usr/local/bin/

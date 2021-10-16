@@ -4,15 +4,13 @@ kind: Service
 apiVersion: v1
 metadata:
   labels:
-    APPNAME: kube-system
-    CLUSTER: kube-system-dashboard
+    app: kube-dashboard
   name: kube-dashboard
   namespace: kube-system
 spec:
   type: NodePort
   selector:
-    APPNAME: kube-system
-    CLUSTER: kube-system-dashboard
+    app: kube-dashboard
   ports:
   - port: 443
     targetPort: 8443

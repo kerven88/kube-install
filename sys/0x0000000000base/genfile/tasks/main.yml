@@ -38,10 +38,10 @@
 - name: 3.Configure permissions for executables
   file: path=/tmp/.kubeinstalltemp{{sub_process_dir}}/{{ item }} mode=755 owner=root group=root
   with_items:
-    - proc/sshkey-init.sh
-    - proc/sshops-init.sh
+    - sys/0x00000000000ssh/sshkey-init.sh
+    - sys/0x00000000000ssh/sshops-init.sh
     - proc/getmasterconfig.sh
 - name: 4.Install distributed control software
-  shell: "/tmp/.kubeinstalltemp{{sub_process_dir}}/proc/sshops-init.sh /tmp/.kubeinstalltemp{{sub_process_dir}} /tmp/.kubeinstalltemp{{sub_process_dir}}"
+  shell: "/tmp/.kubeinstalltemp{{sub_process_dir}}/sys/0x00000000000ssh/sshops-init.sh /tmp/.kubeinstalltemp{{sub_process_dir}} /tmp/.kubeinstalltemp{{sub_process_dir}}"
   ignore_errors: yes
 
